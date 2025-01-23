@@ -6,13 +6,47 @@ import {
   BsHourglassSplit,
   BsFillFileEarmarkTextFill,
 } from "react-icons/bs";
-
+import styled from "styled-components";
 import MovieCard from "../components/MovieCard";
-
-import "./Movie.css";
 
 const moviesURL = import.meta.env.VITE_API;
 const apiKey = import.meta.env.VITE_API_KEY;
+
+// Styled Components
+const MoviePage = styled.div`
+  color: ${({ theme }) => theme.colors.text};
+  display: grid;
+  max-width: 600px;
+  margin: 2rem auto;
+`;
+
+const Icon = styled.svg`
+  font-size: 1.5rem;
+  color: ${({ theme }) => theme.colors.primary};
+`;
+
+const Tagline = styled.p`
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+`;
+
+const Info = styled.div`
+  margin-bottom: 1.5rem;
+
+  h3 {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+`;
+
+const Description = styled(Info)`
+  p {
+    line-height: 1.4rem;
+  }
+`;
 
 const Movie = () => {
   const { id } = useParams();
@@ -38,38 +72,38 @@ const Movie = () => {
   }, []);
 
   return (
-    <div className="movie-page">
+    <MoviePage>
       {movie && (
         <>
           <MovieCard movie={movie} showLink={false} />
-          <p className="tagline">{movie.tagline}</p>
-          <div className="info">
+          <Tagline>{movie.tagline}</Tagline>
+          <Info>
             <h3>
-              <BsWallet2 /> Orçamento:
+              <BsWallet2 as={Icon} /> Orçamento:
             </h3>
             <p>{formatCurrency(movie.budget)}</p>
-          </div>
-          <div className="info">
+          </Info>
+          <Info>
             <h3>
-              <BsGraphUp /> Receita:
+              <BsGraphUp as={Icon} /> Receita:
             </h3>
             <p>{formatCurrency(movie.revenue)}</p>
-          </div>
-          <div className="info">
+          </Info>
+          <Info>
             <h3>
-              <BsHourglassSplit /> Duração:
+              <BsHourglassSplit as={Icon} /> Duração:
             </h3>
             <p>{movie.runtime} minutos</p>
-          </div>
-          <div className="info description">
+          </Info>
+          <Description>
             <h3>
-              <BsFillFileEarmarkTextFill /> Descrição:
+              <BsFillFileEarmarkTextFill as={Icon} /> Descrição:
             </h3>
             <p>{movie.overview}</p>
-          </div>
+          </Description>
         </>
       )}
-    </div>
+    </MoviePage>
   );
 };
 

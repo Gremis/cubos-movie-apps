@@ -1,41 +1,64 @@
-import { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi";
+import { BiCameraMovie } from "react-icons/bi";
+import styled from "styled-components";
+import SearchBar from "./SearchBar"; // Importando o SearchBar
 
-import "./Navbar.css";
+// Styled Components
+const NavbarContainer = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: ${({ theme }) => theme.colors.background};
+`;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+
+  h2 a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: ${({ theme }) => theme.colors.text};
+    text-decoration: none;
+  }
+`;
+
+const SearchContainer = styled.div`
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 1200px;
+`;
+
+// Componente Navbar
 const Navbar = () => {
-  const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!search) return;
-
-    navigate(`/search?q=${search}`, { replace: true });
-    setSearch("");
+  const handleSearch = (query) => {
+    navigate(`/search?q=${query}`);
   };
 
   return (
-    <nav id="navbar">
-      <h2>
-        <Link to="/">
-          <BiCameraMovie /> MoviesLib
-        </Link>
-      </h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Busque um filme"
-          onChange={(e) => setSearch(e.target.value)}
-          value={search}
-        />
-        <button type="submit">
-          <BiSearchAlt2 />
-        </button>
-      </form>
-    </nav>
+    <NavbarContainer>
+      {/* Cabeçalho */}
+      <Header>
+        <h2>
+          <Link to="/">
+            <BiCameraMovie /> MoviesLib
+          </Link>
+        </h2>
+      </Header>
+
+      {/* Barra de Busca */}
+      <SearchContainer>
+        <SearchBar onSearch={handleSearch} />
+      </SearchContainer>
+    </NavbarContainer>
   );
 };
 
