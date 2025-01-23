@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import ChevronLeftIcon from "../assets/icons/chevronleft.svg";
+import ChevronRightIcon from "../assets/icons/chevronright.svg";
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -15,6 +17,9 @@ const PaginationContainer = styled.div`
     color: ${({ theme }) => theme.colors.text};
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.3s ease;
 
     &:hover {
@@ -31,6 +36,11 @@ const PaginationContainer = styled.div`
       background-color: ${({ theme }) => theme.colors.background};
       color: ${({ theme }) => theme.colors.textSecondary};
       cursor: not-allowed;
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
     }
   }
 `;
@@ -52,7 +62,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
         disabled={currentPage === 1}
         aria-label="Página anterior"
       >
-        {`<`}
+        <img src={ChevronLeftIcon} alt="Chevron Left Icon" />
       </button>
 
       {pages.map((page) => (
@@ -71,7 +81,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
         disabled={currentPage === totalPages}
         aria-label="Próxima página"
       >
-        {`>`}
+        <img src={ChevronRightIcon} alt="Chevron Right Icon" />
       </button>
     </PaginationContainer>
   );

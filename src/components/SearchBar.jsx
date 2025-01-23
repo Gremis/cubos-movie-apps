@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import SearchIcon from "../assets/icons/search.svg"; // Importar o ícone SVG
 
 const SearchForm = styled.form`
   display: flex;
@@ -31,12 +32,21 @@ const SearchForm = styled.form`
   button {
     background: none;
     border: none;
-    color: ${({ theme }) => theme.colors.primary};
     cursor: pointer;
-    font-size: 1.5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    &:hover {
-      color: ${({ theme }) => theme.colors.primaryHover};
+    img {
+      width: 20px;
+      height: 20px;
+      filter: ${({ theme }) => theme.colors.logo.filter}; /* Opcional: Ajuste de cor do ícone */
+      transition: filter 0.2s ease-in-out;
+    }
+
+    &:hover img {
+      filter: ${({ theme }) => theme.colors.primaryHover}; /* Cor no hover */
     }
   }
 `;
@@ -60,6 +70,7 @@ const SearchBar = ({ onSearch }) => {
         onChange={(e) => setQuery(e.target.value)}
       />
       <button type="submit">
+        <img src={SearchIcon} alt="Search Icon" />
       </button>
     </SearchForm>
   );

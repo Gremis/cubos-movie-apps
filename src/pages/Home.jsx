@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useMovies } from "../hooks/useMovies";
 import MovieCard from "../components/MovieCard";
 import Filters from "../components/Filters";
 import Pagination from "../components/Pagination";
+import SearchBar from "../components/SearchBar";
 import styled from "styled-components";
+import FilterIcon from "../assets/icons/filter.svg"; // Importação do ícone
 
 const Container = styled.div`
   .title {
@@ -11,6 +14,36 @@ const Container = styled.div`
     font-size: 2.5rem;
     text-align: center;
     margin: 2rem 0 1rem;
+  }
+`;
+
+const TopBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 1200px;
+`;
+
+const FilterButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -23,26 +56,9 @@ const MoviesContainer = styled.div`
   margin: 0 auto;
 `;
 
-const FiltersToggleButton = styled.button`
-  display: block;
-  margin: 1rem auto;
-  padding: 0.5rem 1rem;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.background};
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.primaryHover};
-  }
-`;
-
 const Home = () => {
   const [filtersVisible, setFiltersVisible] = useState(false);
+  const navigate = useNavigate();
   const {
     movies,
     loading,
@@ -62,22 +78,24 @@ const Home = () => {
     setFiltersVisible((prev) => !prev);
   };
 
+  const handleSearch = (query) => {
+    navigate(`/search?q=${query}`);
+  };
 
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <Container>
-      <h2 className="title">Filmes Populares</h2>
-      <FiltersToggleButton onClick={toggleFilters}>
-        {filtersVisible ? "Esconder Filtros" : "Mostrar Filtros"}
-      </FiltersToggleButton>
+      <TopBar>
+        <SearchBar onSearch={handleSearch} />
+        <FilterButton onClick={toggleFilters}>
+          <img src={FilterIcon} alt="Filter Icon" />
+        </FilterButton>
+      </TopBar>
 
       {filtersVisible && (
-        <Filters
-          filters={filters}
-          onFilterChange={handleFilterChange}
-        />
+        <Filters filters={filters} onFilterChange={handleFilterChange} />
       )}
 
       <MoviesContainer>

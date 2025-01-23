@@ -1,6 +1,6 @@
 import React from "react";
-import { useMovies } from "../hooks/useMovies";
 import { useSearchParams } from "react-router-dom";
+import { useMovies } from "../hooks/useMovies";
 import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
 import styled from "styled-components";
