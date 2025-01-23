@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { BiSearchAlt2 } from "react-icons/bi";
 
-// Styled Components
 const SearchForm = styled.form`
   display: flex;
   gap: 0.5rem;

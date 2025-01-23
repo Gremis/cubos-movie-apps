@@ -8,11 +8,8 @@ import {
 } from "react-icons/bs";
 import styled from "styled-components";
 import MovieCard from "../components/MovieCard";
+import { BASE_URL, API_KEY } from "../services/env";
 
-const moviesURL = import.meta.env.VITE_API;
-const apiKey = import.meta.env.VITE_API_KEY;
-
-// Styled Components
 const MoviePage = styled.div`
   color: ${({ theme }) => theme.colors.text};
   display: grid;
@@ -52,11 +49,16 @@ const Movie = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
 
-  const getMovie = async (url) => {
-    const res = await fetch(url);
-    const data = await res.json();
-    console.log(data);
-    setMovie(data);
+  const getMovie = async () => {
+    try {
+      const url = `${BASE_URL}movie/${id}?${API_KEY}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Erro ao buscar detalhes do filme");
+      const data = await res.json();
+      setMovie(data);
+    } catch (error) {
+      console.error("Erro:", error.message);
+    }
   };
 
   const formatCurrency = (number) => {
@@ -67,9 +69,8 @@ const Movie = () => {
   };
 
   useEffect(() => {
-    const movieUrl = `${moviesURL}${id}?${apiKey}`;
-    getMovie(movieUrl);
-  }, []);
+    getMovie();
+  }, [id]);
 
   return (
     <MoviePage>

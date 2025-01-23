@@ -2,9 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BiCameraMovie } from "react-icons/bi";
 import styled from "styled-components";
-import SearchBar from "./SearchBar"; // Importando o SearchBar
+import SearchBar from "./SearchBar"; 
 
-// Styled Components
 const NavbarContainer = styled.nav`
   display: flex;
   flex-direction: column;
@@ -35,7 +34,6 @@ const SearchContainer = styled.div`
   max-width: 1200px;
 `;
 
-// Componente Navbar
 const Navbar = () => {
   const navigate = useNavigate();
 
@@ -45,7 +43,6 @@ const Navbar = () => {
 
   return (
     <NavbarContainer>
-      {/* Cabeçalho */}
       <Header>
         <h2>
           <Link to="/">
@@ -54,7 +51,6 @@ const Navbar = () => {
         </h2>
       </Header>
 
-      {/* Barra de Busca */}
       <SearchContainer>
         <SearchBar onSearch={handleSearch} />
       </SearchContainer>

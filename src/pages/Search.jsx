@@ -4,7 +4,6 @@ import styled from "styled-components";
 import MovieCard from "../components/MovieCard";
 import { fetchFromAPI } from "../services/api";
 
-// Styled Components
 const Container = styled.div`
   .title {
     color: ${({ theme }) => theme.colors.text};

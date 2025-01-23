@@ -1,10 +1,8 @@
 import React from "react";
 import { useFetchMovies } from "../hooks/useFetchMovies";
-import { usePagination } from "../hooks/usePagination";
-import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
+import MovieCard from "../components/MovieCard";
 import styled from "styled-components";
-
 
 const Container = styled.div`
   .title {
@@ -21,8 +19,8 @@ const Container = styled.div`
 
 const MoviesContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 itens por linha */
-  gap: 1rem; /* Espaço entre os itens */
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 1rem;
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -92,28 +90,34 @@ const PaginationContainer = styled.div`
 `;
 
 const Home = () => {
-  const { data: movies, loading } = useFetchMovies("movie/top_rated");
-  const { currentItems, totalPages, changePage, currentPage } = usePagination(
-    movies,
-    10
-  );
+  const {
+    data: movies,
+    loading,
+    fetchNextPage,
+    currentPage,
+    totalPages,
+  } = useFetchMovies("discover/movie");
+
+  const handlePageChange = (page) => {
+    fetchNextPage(page);
+  };
 
   if (loading) return <p>Carregando...</p>;
 
   return (
     <Container>
-      <h2 className="title">Melhores filmes:</h2>
+      <h2 className="title">Todos os Filmes:</h2>
       <MoviesContainer>
-        {currentItems.map((movie) => (
+        {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </MoviesContainer>
       <PaginationContainer>
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onPageChange={changePage}
-        />
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
       </PaginationContainer>
     </Container>
   );

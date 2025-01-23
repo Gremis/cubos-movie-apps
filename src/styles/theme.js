@@ -1,4 +1,3 @@
-// src/styles/theme.js
 import { purpleDark, purple, mauveDark, mauve } from "@radix-ui/colors";
 
 export const lightTheme = {

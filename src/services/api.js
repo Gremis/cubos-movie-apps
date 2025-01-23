@@ -1,8 +1,8 @@
-import { BASE_URL, API_KEY, BEARER_TOKEN } from "./env";
+import { BASE_URL, BEARER_TOKEN } from "./env";
 
 export const fetchFromAPI = async (endpoint) => {
   try {
-    const url = `${BASE_URL}${endpoint}`; // Remove o ?api_key do endpoint para usar o token
+    const url = `${BASE_URL}${endpoint}`;
     const res = await fetch(url, {
       method: "GET",
       headers: {
@@ -11,7 +11,7 @@ export const fetchFromAPI = async (endpoint) => {
       },
     });
 
-    if (!res.ok) throw new Error("Erro ao buscar dados da API");
+    if (!res.ok) throw new Error(`Erro ao buscar dados: ${res.status}`);
     return await res.json();
   } catch (error) {
     console.error("Erro na API:", error.message);

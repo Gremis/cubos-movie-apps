@@ -3,32 +3,53 @@
 <hr/>
 
 ## ⚙️ Sobre o Projeto:
-Aplicativo web para busca e visualização de filmes usando a API do TMDB. O foco está na experiência do usuário, com uma interface moderna e responsiva.
+Aplicativo web desenvolvido para buscar e visualizar filmes utilizando a API do TMDB. O foco principal está na experiência do usuário, com uma interface moderna, responsiva e temas claros e escuros para maior acessibilidade.
+
+Este projeto foi estruturado para ser escalável, de fácil manutenção e altamente reutilizável, utilizando uma arquitetura baseada em componentes reutilizáveis e modulares. A escolha de tecnologias modernas, como o Vite e a implementação de PWA (Progressive Web App), assegura um desempenho otimizado e suporte para funcionalidade offline.
 
 ## ⚙️ Funcionalidades:
-- Pesquisa de filmes com filtro.
-- Paginação para listar os filmes.
-- Tema claro e escuro utilizando Radix Colors.
-- Página de detalhes com informações completas de cada filme.
+- Pesquisa de Filmes: Com barra de busca dinâmica, permite encontrar filmes de forma rápida e eficiente.
+- Paginação: Exibição de filmes com paginação, garantindo uma navegação fluida mesmo em grandes volumes de dados.
+- Tema Claro e Escuro: Implementado com Radix Colors, oferece uma interface personalizável para o usuário.
+- Página de Detalhes: Exibe informações completas sobre os filmes, como orçamento, receita, duração e descrição.
+- Progressive Web App (PWA): Funcionalidades offline com carregamento rápido, permitindo que o aplicativo seja instalado como app em dispositivos móveis ou desktop.
 
 ## ⚙️ Tecnologias Utilizadas:
-- React
-- Styled-Components
-- Radix Colors
-- React Router
-- Axios
+
+- React: Biblioteca para construção da interface do usuário.
+- Vite: Ferramenta de build extremamente rápida e otimizada para desenvolvimento de projetos modernos.
+- Styled-Components: Biblioteca para estilização de componentes com suporte a temas dinâmicos.
+- Radix Colors: Sistema de cores acessíveis para construção de temas claros e escuros.
+- React Router: Gerenciamento de rotas para navegação entre páginas.
+- Fetch API: Requisições HTTP feitas utilizando a API nativa do JavaScript.
+- PWA: Implementação de Progressive Web App para suporte offline e instalação como aplicativo.
 
 
-## ⚙️ What works:
-- Summary of some space telescopes.
-- Game that represents what the human eye would see when seeing astronomical phenomena.
-- Trivia where an image is presented, provides a brief explanation of it and the user must find out which telescope took it.
-- It is an application that works online and offline, based on PWA technology. For each correct answer the player accumulates points that are presented in a scoring section.
+## ⚙️ O que funciona:
+- Busca de Filmes: Uma barra de busca funcional integrada com a API do TMDB para encontrar filmes específicos.
+- Paginação: Listagem de filmes com suporte à paginação para melhorar a navegação.
+- Modo Claro e Escuro: Alternância de temas para atender às preferências do usuário.
+- Página de Detalhes de Filmes: Exibe informações detalhadas, incluindo orçamento, receita, duração e descrição do filme.
+- Funcionalidade Offline com PWA: O aplicativo funciona mesmo sem conexão à internet.
 
-## ⚙️ How much can develop with more time in the future:
-- Make configurations in the design to make it more responsive.
-- A more advanced game could involve an app that simulates images using the NASA-provided WebbPSF tool.
-- Other games of different difficulty level.
+## ⚙️ O que Pode ser Desenvolvido com Mais Tempo no Futuro:
+- Implementação de um sistema de autenticação para usuários salvos.
+- Listas personalizadas, permitindo ao usuário salvar filmes favoritos.
+- Mais animações e microinterações para melhorar a experiência do usuário.
+- Integração com outras APIs, como IMDb ou Rotten Tomatoes, para obter mais informações dos filmes.
+
+## ⚙️ Arquitectura de Projeto:
+Este projeto utiliza uma arquitetura baseada em componentes (Component-Based Architecture), onde cada funcionalidade é separada em componentes reutilizáveis e modulares. Essa abordagem permite:
+
+- Facilidade de Manutenção: Cada componente tem uma responsabilidade única e clara, tornando o código mais fácil de entender e modificar.
+- Escalabilidade: Novas funcionalidades podem ser adicionadas sem impactar no código existente.
+- Reutilização: Componentes como MovieCard, Pagination e SearchBar podem ser reutilizados em diferentes partes do projeto.
+
+A arquitetura baseada em componentes, combinada com o uso do Vite como ferramenta de build, foi escolhida para garantir:
+
+- Performance Otimizada: O Vite fornece carregamento rápido durante o desenvolvimento e build otimizado para produção.
+- Modularidade: A separação de responsabilidades entre componentes facilita a colaboração em equipe e testes isolados.
+- Suporte a PWA: Com Vite e a API nativa fetch, a configuração de PWA é simples e eficiente, garantindo funcionalidade offline e instalação em dispositivos.
 
 ## Instalação
 
@@ -37,7 +58,7 @@ Aplicativo web para busca e visualização de filmes usando a API do TMDB. O foc
 Clone this repository on your machine:
 
 ```bash
-$ git clone https://github.com/
+$ git clone https://github.com/Gremis/cubos-movie-apps
 ```
 
 cd `cubos-movie-apps` and run:
@@ -47,10 +68,24 @@ npm install
 ```
 
 ```bash
-npm start
+npm run dev
+```
+
+Para criar uma build de produção
+
+```bash
+npm run build
+```
+
+Para servir a build localmente
+
+```bash
+npm run serve
 ```
 
 <br/>
 
 
+## ⚙️ Projeto Online:
 
+Para servir a build localmente
