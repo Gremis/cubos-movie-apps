@@ -7,15 +7,16 @@ const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  margin: 1rem 0;
+  gap: 12px;
+  margin: 24px 0;
 
   button {
-    padding: 0.5rem 1rem;
+    
+    padding: 12.5px 20px;
     border: none;
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
     color: ${({ theme }) => theme.colors.text};
-    border-radius: 5px;
+    border-radius: 2px;
     cursor: pointer;
     display: flex;
     align-items: center;

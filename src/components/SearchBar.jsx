@@ -1,27 +1,34 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import SearchIcon from "../assets/icons/search.svg"; // Importar o ícone SVG
+import SearchIcon from "../assets/icons/search.svg";
 
 const SearchForm = styled.form`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   width: 100%;
-  max-width: 600px;
+  max-width: 488px;
+  height: 50px;
+  border: 1px solid ${({ theme }) => theme.colors.neutral2};
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
   background-color: ${({ theme }) => theme.colors.background};
-  border: 2px solid ${({ theme }) => theme.colors.text};
-  border-radius: 8px;
-  padding: 0.5rem;
 
   input {
     flex: 1;
     border: none;
-    background-color: transparent;
+    background: none;
     color: ${({ theme }) => theme.colors.text};
-    font-size: 1rem;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
 
     &::placeholder {
-      color: ${({ theme }) => theme.colors.text};
+      color: ${({ theme }) => theme.colors.textSecondary};
+      opacity: 0.5;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
     }
 
     &:focus {
@@ -39,14 +46,13 @@ const SearchForm = styled.form`
     justify-content: center;
 
     img {
-      width: 20px;
-      height: 20px;
-      filter: ${({ theme }) => theme.colors.logo.filter}; /* Opcional: Ajuste de cor do ícone */
-      transition: filter 0.2s ease-in-out;
+      width: 24px;
+      height: 24px;
     }
 
     &:hover img {
-      filter: ${({ theme }) => theme.colors.primaryHover}; /* Cor no hover */
+      transform: none;
+      color: none;
     }
   }
 `;
@@ -61,6 +67,12 @@ const SearchBar = ({ onSearch }) => {
     setQuery("");
   };
 
+  const handleIconClick = () => {
+    if (!query.trim()) return;
+    onSearch(query);
+    setQuery("");
+  };
+
   return (
     <SearchForm onSubmit={handleSubmit}>
       <input
@@ -69,7 +81,7 @@ const SearchBar = ({ onSearch }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button type="submit">
+      <button type="button" onClick={handleIconClick}>
         <img src={SearchIcon} alt="Search Icon" />
       </button>
     </SearchForm>

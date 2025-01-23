@@ -6,7 +6,7 @@ import Filters from "../components/Filters";
 import Pagination from "../components/Pagination";
 import SearchBar from "../components/SearchBar";
 import styled from "styled-components";
-import FilterIcon from "../assets/icons/filter.svg"; // Importação do ícone
+import FilterIcon from "../assets/icons/filter.svg"; 
 
 const Container = styled.div`
   .title {
@@ -19,41 +19,54 @@ const Container = styled.div`
 
 const TopBar = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin: 1rem auto;
+  gap: 10px; 
+  margin: 24px auto;
   width: 100%;
-  max-width: 1200px;
+  max-width: 800px;
 `;
 
 const FilterButton = styled.button`
-  background: none;
+  background-color: ${({ theme }) => theme.colors.primaryBackground};
   border: none;
-  cursor: pointer;
-  padding: 0.5rem;
+  width: 64px;
+  height: 48px;
+  min-height: 44px;
+  border-radius: 2px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
+  gap: 12px;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primaryBackground};
+    transform: none;
+  }
 
   img {
     width: 24px;
     height: 24px;
   }
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.primary};
-  }
 `;
 
 const MoviesContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
-  padding: 2rem;
-  max-width: 1200px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  padding: 24px;
+  max-width: 1322px;
+  width: 100%;
   margin: 0 auto;
+  background-color: ${({ theme }) => theme.colors.primaryBorder};
+  border-radius: 4px;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
 `;
 
 const Home = () => {

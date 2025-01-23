@@ -45,8 +45,13 @@ export const lightTheme = {
 export const darkTheme = {
   colors: {
     // Cores primárias
+    primaryBackground: purpleDark.purple2,
+    primaryAccent: purpleDark.purple3,
     primary: purpleDark.purple9,
     primaryHover: purpleDark.purple10,
+
+    primaryImage: `rgba(241, 221, 255, 0.98)`,
+    primaryBorder: `rgba(255, 255, 255, 0.1)`,
 
     // Cores secundárias
     secondary: mauveDark.mauve7,
