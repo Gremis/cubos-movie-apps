@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BiCameraMovie } from "react-icons/bi";
 import styled from "styled-components";
-import SearchBar from "./SearchBar"; 
+import SearchBar from "./SearchBar";
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -26,6 +26,20 @@ const Header = styled.div`
     color: ${({ theme }) => theme.colors.text};
     text-decoration: none;
   }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.text};
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.background};
+    }
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -34,7 +48,7 @@ const SearchContainer = styled.div`
   max-width: 1200px;
 `;
 
-const Navbar = () => {
+const Navbar = ({ toggleTheme, theme }) => {
   const navigate = useNavigate();
 
   const handleSearch = (query) => {
@@ -49,6 +63,12 @@ const Navbar = () => {
             <BiCameraMovie /> MoviesLib
           </Link>
         </h2>
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+        >
+          {theme === "light" ? "Tema Escuro" : "Tema Claro"}
+        </button>
       </Header>
 
       <SearchContainer>

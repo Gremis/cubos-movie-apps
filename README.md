@@ -86,6 +86,10 @@ npm run serve
 <br/>
 
 
+## ⚙️ Documentação API:
+
+https://developer.themoviedb.org/reference/intro/getting-started
+
 ## ⚙️ Projeto Online:
 
 Para servir a build localmente

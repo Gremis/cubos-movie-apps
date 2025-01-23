@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { Outlet } from "react-router-dom";
@@ -17,7 +16,7 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyle />
       <div className="app-container">
-      <Navbar toggleTheme={toggleTheme} theme={theme} />
+        <Navbar toggleTheme={toggleTheme} theme={theme} />
         <Outlet />
       </div>
     </ThemeProvider>
