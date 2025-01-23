@@ -3,13 +3,6 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { BASE_URL, API_KEY } from "../services/env";
 import { useFetchMovieVideos } from "../hooks/useFetchMovieVideos";
-import {
-  BsGraphUp,
-  BsWallet2,
-  BsHourglassSplit,
-  BsCalendar,
-  BsStarFill,
-} from "react-icons/bs";
 
 const MoviePage = styled.div`
   color: ${({ theme }) => theme.colors.text};
@@ -145,9 +138,9 @@ const Movie = () => {
   const formatCurrency = (number) =>
     number
       ? number.toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-        })
+        style: "currency",
+        currency: "USD",
+      })
       : "N/A";
 
   useEffect(() => {
@@ -188,27 +181,27 @@ const Movie = () => {
 
               <Info>
                 <h3>
-                  <BsCalendar /> Lançamento:
+                  Lançamento:
                 </h3>
                 <p>{movie.release_date}</p>
 
                 <h3>
-                  <BsHourglassSplit /> Duração:
+                  Duração:
                 </h3>
                 <p>{movie.runtime} minutos</p>
 
                 <h3>
-                  <BsWallet2 /> Orçamento:
+                  Orçamento:
                 </h3>
                 <p>{formatCurrency(movie.budget)}</p>
 
                 <h3>
-                  <BsGraphUp /> Receita:
+                  Receita:
                 </h3>
                 <p>{formatCurrency(movie.revenue)}</p>
 
                 <h3>
-                  <BsStarFill /> Popularidade:
+                  Popularidade:
                 </h3>
                 <p>{movie.popularity.toFixed(2)}</p>
 

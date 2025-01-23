@@ -3,8 +3,6 @@ import { useFetchMovies } from "../hooks/useFetchMovies";
 import Pagination from "../components/Pagination";
 import MovieCard from "../components/MovieCard";
 import styled from "styled-components";
-import { BiFilter } from "react-icons/bi";
-
 
 const Container = styled.div`
   .title {
@@ -113,7 +111,7 @@ const Home = () => {
   };
 
   const handlePageChange = (page) => {
-    fetchFilteredMovies(filters, page); 
+    fetchFilteredMovies(filters, page);
   };
 
   if (loading) return <p>Carregando...</p>;
@@ -121,9 +119,8 @@ const Home = () => {
   return (
     <Container>
       <button onClick={toggleFilters} as={FiltersToggleButton}>
-  <BiFilter />
-  {filtersVisible ? "Fechar Filtros" : "Abrir Filtros"}
-</button>
+        {filtersVisible ? "Fechar Filtros" : "Abrir Filtros"}
+      </button>
 
       {filtersVisible && (
         <FiltersContainer>

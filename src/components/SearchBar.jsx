@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { BiSearchAlt2 } from "react-icons/bi";
 
 const SearchForm = styled.form`
   display: flex;
@@ -61,7 +60,6 @@ const SearchBar = ({ onSearch }) => {
         onChange={(e) => setQuery(e.target.value)}
       />
       <button type="submit">
-        <BiSearchAlt2 />
       </button>
     </SearchForm>
   );

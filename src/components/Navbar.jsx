@@ -62,10 +62,10 @@ const Navbar = ({ toggleTheme, theme }) => {
   return (
     <NavbarContainer>
       <Header>
-      <h2>
+        <h2>
           <Link to="/">
-            <Logo src="/icon.png" alt="Movies Logo" /> 
-            Movies 
+            <Logo src="/icon.png" alt="Movies Logo" />
+            Movies
           </Link>
         </h2>
         <button className="theme-toggle" onClick={toggleTheme}>

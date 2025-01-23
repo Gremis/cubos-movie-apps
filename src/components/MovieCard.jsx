@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
 import { IMAGE_BASE_URL } from "../services/env";
 import styled from "styled-components";
 
@@ -72,7 +71,7 @@ const MovieCard = ({ movie, showLink = true }) => (
     <div className="info">
       <h2>{movie.title}</h2>
       <p>
-        <FaStar /> {movie.vote_average || "N/A"}
+        {movie.vote_average || "N/A"}
       </p>
       <div className="genres">
         {movie.genres?.map((genre) => (
