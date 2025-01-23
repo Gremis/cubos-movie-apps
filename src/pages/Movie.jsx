@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { BASE_URL, API_KEY } from "../services/env";
 import { useFetchMovieVideos } from "../hooks/useFetchMovieVideos";
+import { useFetchMovieDetails } from "../hooks/useFetchMovieDetails";
 
 const MoviePage = styled.div`
   color: ${({ theme }) => theme.colors.text};
@@ -119,21 +118,8 @@ const TrailerContainer = styled.div`
 
 const Movie = () => {
   const { id } = useParams();
-  const [movie, setMovie] = useState(null);
-
+  const { movie, loading, error } = useFetchMovieDetails(id);
   const { trailer, loading: trailerLoading } = useFetchMovieVideos(id);
-
-  const getMovie = async () => {
-    try {
-      const url = `${BASE_URL}movie/${id}?${API_KEY}`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("Erro ao buscar detalhes do filme");
-      const data = await res.json();
-      setMovie(data);
-    } catch (error) {
-      console.error("Erro:", error.message);
-    }
-  };
 
   const formatCurrency = (number) =>
     number
@@ -143,9 +129,8 @@ const Movie = () => {
       })
       : "N/A";
 
-  useEffect(() => {
-    getMovie();
-  }, [id]);
+  if (loading) return <p>Carregando detalhes do filme...</p>;
+  if (error) return <p>Erro: {error}</p>;
 
   return (
     <MoviePage>
@@ -159,58 +144,33 @@ const Movie = () => {
             <Details>
               <h1>{movie.title}</h1>
               <p>{movie.tagline}</p>
-
               <Genres>
                 {movie.genres.map((genre) => (
                   <span key={genre.id}>{genre.name}</span>
                 ))}
               </Genres>
-
               <ProgressCircle percentage={movie.vote_average * 10}>
                 <svg width="100" height="100">
                   <circle cx="50" cy="50" r="45" className="background" />
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="45"
-                    className="circle"
-                  />
+                  <circle cx="50" cy="50" r="45" className="circle" />
                 </svg>
                 <div className="percentage">{movie.vote_average * 10}%</div>
               </ProgressCircle>
-
               <Info>
-                <h3>
-                  Lançamento:
-                </h3>
+                <h3>Lançamento:</h3>
                 <p>{movie.release_date}</p>
-
-                <h3>
-                  Duração:
-                </h3>
+                <h3>Duração:</h3>
                 <p>{movie.runtime} minutos</p>
-
-                <h3>
-                  Orçamento:
-                </h3>
+                <h3>Orçamento:</h3>
                 <p>{formatCurrency(movie.budget)}</p>
-
-                <h3>
-                  Receita:
-                </h3>
+                <h3>Receita:</h3>
                 <p>{formatCurrency(movie.revenue)}</p>
-
-                <h3>
-                  Popularidade:
-                </h3>
+                <h3>Popularidade:</h3>
                 <p>{movie.popularity.toFixed(2)}</p>
-
                 <h3>Votos:</h3>
                 <p>{movie.vote_count}</p>
-
                 <h3>Situação:</h3>
                 <p>{movie.status}</p>
-
                 <h3>Lucro:</h3>
                 <p>
                   {formatCurrency(movie.revenue - movie.budget > 0
@@ -229,8 +189,10 @@ const Movie = () => {
           <TrailerContainer>
             {trailerLoading ? (
               <p>Carregando trailer...</p>
+            ) : trailer ? (
+              <iframe src={trailer} title="Trailer" allowFullScreen></iframe>
             ) : (
-              trailer && <iframe src={trailer} title="Trailer" allowFullScreen></iframe>
+              <p>Trailer não disponível.</p>
             )}
           </TrailerContainer>
         </>

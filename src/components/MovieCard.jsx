@@ -1,38 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { IMAGE_BASE_URL } from "../services/env";
 import styled from "styled-components";
+import { useMovieCard } from "../hooks/useMovieCard";
 
 const CardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   img {
     width: 100%;
     height: auto;
+    border-bottom: 4px solid ${({ theme }) => theme.colors.primary};
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   .info {
     padding: 1rem;
+    background: linear-gradient(
+      135deg,
+      ${({ theme }) => theme.colors.backgroundSecondary} 0%,
+      ${({ theme }) => theme.colors.background} 100%
+    );
+    border-radius: 0 0 15px 15px;
 
     h2 {
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       margin: 0.5rem 0;
+      text-align: center;
     }
 
     p {
       margin: 0.5rem 0;
-      font-size: 0.9rem;
+      font-size: 1rem;
+      font-weight: bold;
+      text-align: center;
     }
 
     .genres {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 0.5rem;
       margin: 0.5rem 0;
 
@@ -65,22 +82,24 @@ const CardContainer = styled.div`
   }
 `;
 
-const MovieCard = ({ movie, showLink = true }) => (
-  <CardContainer>
-    <img src={`${IMAGE_BASE_URL}${movie.poster_path}`} alt={movie.title} />
-    <div className="info">
-      <h2>{movie.title}</h2>
-      <p>
-        {movie.vote_average || "N/A"}
-      </p>
-      <div className="genres">
-        {movie.genres?.map((genre) => (
-          <span key={genre.id}>{genre.name}</span>
-        ))}
+const MovieCard = ({ movie, showLink = true }) => {
+  const { posterUrl, title, voteAverage, genres } = useMovieCard(movie);
+
+  return (
+    <CardContainer>
+      <img src={posterUrl} alt={title} />
+      <div className="info">
+        <h2>{title}</h2>
+        <p>{voteAverage}</p>
+        <div className="genres">
+          {genres.map((genre) => (
+            <span key={genre.id}>{genre.name}</span>
+          ))}
+        </div>
+        {showLink && <Link to={`/movie/${movie.id}`}>Detalhes</Link>}
       </div>
-      {showLink && <Link to={`/movie/${movie.id}`}>Detalhes</Link>}
-    </div>
-  </CardContainer>
-);
+    </CardContainer>
+  );
+};
 
 export default MovieCard;

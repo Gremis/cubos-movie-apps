@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { BASE_URL, BEARER_TOKEN } from "../services/env";
 
 export const useFetchMovieVideos = (movieId) => {
-  const [trailer, setTrailer] = useState(null); // Link do trailer
-  const [videos, setVideos] = useState([]); // Todos os vídeos disponíveis
+  const [trailer, setTrailer] = useState(null);
+  const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
