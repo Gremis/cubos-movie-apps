@@ -6,6 +6,9 @@ export const lightTheme = {
     primaryHover: purple.purple10,
     background: mauve.mauve1,
     text: mauve.mauve12,
+    logo: {
+      filter: 'invert(1)',
+    },
   },
 };
 
@@ -15,5 +18,8 @@ export const darkTheme = {
     primaryHover: purpleDark.purple10,
     background: mauveDark.mauve1,
     text: mauveDark.mauve12,
+    logo: {
+      filter: 'invert(0)',
+    },
   },
 };

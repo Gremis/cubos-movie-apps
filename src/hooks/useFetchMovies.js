@@ -1,31 +1,36 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchFromAPI } from "../services/api";
 
 export const useFetchMovies = (endpoint) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(true);
 
-  const fetchNextPage = async (page = 1) => {
+  const fetchFilteredMovies = async (filters = {}, page = 1) => {
     setLoading(true);
+
+    const query = new URLSearchParams({
+      ...filters,
+      page,
+    }).toString();
+
+    const url = `${endpoint}?${query}`;
     try {
-      const result = await fetchFromAPI(`${endpoint}?page=${page}`);
-      if (result) {
-        setData(result.results);
-        setTotalPages(result.total_pages);
-        setCurrentPage(page);
-      }
+      const result = await fetchFromAPI(url);
+      setData(result.results || []);
+      setTotalPages(result.total_pages || 1);
+      setCurrentPage(page);
     } catch (error) {
-      console.error("Erro ao buscar dados:", error.message);
+      console.error("Erro ao buscar filmes:", error.message);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchNextPage();
-  }, [endpoint]);
+    fetchFilteredMovies();
+  }, []);
 
-  return { data, loading, fetchNextPage, currentPage, totalPages };
+  return { data, loading, fetchFilteredMovies, currentPage, totalPages };
 };

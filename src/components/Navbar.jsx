@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BiCameraMovie } from "react-icons/bi";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 
@@ -48,6 +47,11 @@ const SearchContainer = styled.div`
   max-width: 1200px;
 `;
 
+const Logo = styled.img`
+  filter: ${({ theme }) => theme.colors.logo.filter};
+  transition: filter 0.2s ease-in-out;
+`;
+
 const Navbar = ({ toggleTheme, theme }) => {
   const navigate = useNavigate();
 
@@ -58,19 +62,16 @@ const Navbar = ({ toggleTheme, theme }) => {
   return (
     <NavbarContainer>
       <Header>
-        <h2>
+      <h2>
           <Link to="/">
-            <BiCameraMovie /> MoviesLib
+            <Logo src="/icon.png" alt="Movies Logo" /> 
+            Movies 
           </Link>
         </h2>
-        <button
-          className="theme-toggle"
-          onClick={toggleTheme}
-        >
-          {theme === "light" ? "Tema Escuro" : "Tema Claro"}
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === 'light' ? "Tema Escuro" : "Tema Claro"}
         </button>
       </Header>
-
       <SearchContainer>
         <SearchBar onSearch={handleSearch} />
       </SearchContainer>

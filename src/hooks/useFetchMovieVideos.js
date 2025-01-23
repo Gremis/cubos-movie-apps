@@ -22,11 +22,11 @@ export const useFetchMovieVideos = (movieId) => {
           throw new Error(`Erro ao buscar vídeos: ${response.statusText}`);
         }
 
-        setVideos(data.results || []); // Salva todos os vídeos
+        setVideos(data.results || []);
         const trailerVideo = data.results.find(
           (video) => video.type === "Trailer" && video.site === "YouTube"
         );
-        setTrailer(trailerVideo ? `https://www.youtube.com/embed/${trailerVideo.key}` : null); // Define o link do trailer
+        setTrailer(trailerVideo ? `https://www.youtube.com/embed/${trailerVideo.key}` : null);
       } catch (err) {
         console.error("Erro ao buscar vídeos:", err.message);
         setError(err.message);
