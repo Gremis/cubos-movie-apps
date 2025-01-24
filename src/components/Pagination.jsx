@@ -69,7 +69,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
           key={page}
           onClick={() => onPageChange(page)}
           className={currentPage === page ? "active" : ""}
-          disabled={page < currentPage} // Desativa páginas anteriores à atual
+          disabled={page < currentPage}
           aria-current={currentPage === page ? "page" : undefined}
         >
           {page}

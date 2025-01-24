@@ -142,7 +142,7 @@ export const darkTheme = {
     // Cores de status
     success: green.green3,
     error: red.red3,
-    warning: yellow.yellow3,
+    warning: yellow.yellow9,
 
     logo: {
       filter: "invert(0)",
