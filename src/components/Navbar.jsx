@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SunIcon from "../assets/icons/sun.svg";
 import MoonIcon from "../assets/icons/moon.svg";
 
 const NavbarContainer = styled.nav`
-  background-color: ${({ theme }) => theme.colors.background};
-  border-bottom: 2px solid ${({ theme }) => theme.colors.primaryBorder};
+  background-color: ${({ theme }) => theme.colors.secondary1};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.secondaryAlpha6};
   padding: 1rem 0;
 `;
 
@@ -31,7 +30,7 @@ const Title = styled.h2`
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.secondary12};
     text-decoration: none;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
@@ -42,7 +41,7 @@ const Title = styled.h2`
 `;
 
 const ThemeToggleButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.primaryBackground};
+  background-color: ${({ theme }) => theme.colors.primaryAlpha2};
   border: none;
   width: 64px;
   height: 48px;
@@ -57,7 +56,7 @@ const ThemeToggleButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.primaryBackground};
+    background-color: none;
     transform: none;
   }
 
@@ -72,10 +71,10 @@ const Navbar = ({ toggleTheme, theme }) => {
     <NavbarContainer>
       <NavbarContent>
         <Title>
-          <Link to="/">
+          <a href="/">
             <Logo src="/icon.png" alt="Movies Logo" />
             Movies
-          </Link>
+          </a>
         </Title>
         <ThemeToggleButton onClick={toggleTheme}>
           <img src={theme === "light" ? MoonIcon : SunIcon} alt="Toggle Theme Icon" />

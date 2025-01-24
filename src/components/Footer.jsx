@@ -6,10 +6,10 @@ const FooterContainer = styled.footer`
   justify-content: center; 
   align-items: center; 
   width: 100%; 
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.secondary1};
   color: ${({ theme }) => theme.colors.text};
   padding: 1rem 0; 
-  border-top: 1px solid ${({ theme }) => theme.colors.primary}; 
+  border-top: 1px solid ${({ theme }) => theme.colors.secondaryAlpha6}; 
 
   p {
     margin: 0;
@@ -18,9 +18,10 @@ const FooterContainer = styled.footer`
     line-height: 19.5px;
     font-weight: 400;
     text-align: center;
+    color: ${({ theme }) => theme.colors.secondaryAlpha11};
 
     a {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.secondaryAlpha11};
       text-decoration: none;
       line-height: 19.5px;
       font-weight: 400;

@@ -11,11 +11,10 @@ const PaginationContainer = styled.div`
   margin: 24px 0;
 
   button {
-    
     padding: 12.5px 20px;
     border: none;
-    background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-    color: ${({ theme }) => theme.colors.text};
+    background-color: ${({ theme }) => theme.colors.primary9};
+    color: ${({ theme }) => theme.colors.secondary12};
     border-radius: 2px;
     cursor: pointer;
     display: flex;
@@ -27,22 +26,21 @@ const PaginationContainer = styled.div`
       background-color: ${({ theme }) => theme.colors.primaryHover};
     }
 
-    &.active {
-      background-color: ${({ theme }) => theme.colors.primary};
-      color: #fff;
-      font-weight: bold;
-    }
-
     &:disabled {
-      background-color: ${({ theme }) => theme.colors.background};
-      color: ${({ theme }) => theme.colors.textSecondary};
-      cursor: not-allowed;
+      background-color: ${({ theme }) => theme.colors.secondaryAlpha3};
+      color: ${({ theme }) => theme.colors.secondaryAlpha9};
     }
 
     img {
       width: 16px;
       height: 16px;
     }
+  }
+
+  .active {
+    background-color: ${({ theme }) => theme.colors.primary};
+    color: #fff;
+    font-weight: bold;
   }
 `;
 
@@ -71,6 +69,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
           key={page}
           onClick={() => onPageChange(page)}
           className={currentPage === page ? "active" : ""}
+          disabled={page < currentPage} // Desativa páginas anteriores à atual
           aria-current={currentPage === page ? "page" : undefined}
         >
           {page}

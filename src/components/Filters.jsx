@@ -8,17 +8,36 @@ const FiltersContainer = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
 
-  select,
-  button {
-    padding: 0.5rem;
+  select {
+    width: 100%;
+    max-width: 273px;
+    height: 50px;
+    border: 1px solid ${({ theme }) => theme.colors.secondary7};
     border-radius: 4px;
-    border: 1px solid ${({ theme }) => theme.colors.text};
-    background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.text};
+    padding: 0 16px;
+    background-color: ${({ theme }) => theme.colors.secondary2};
+    color: ${({ theme }) => theme.colors.secondary7}; /* Cor do texto */
+    appearance: none; /* Remove a flecha padrão */
+    -webkit-appearance: none; /* Para navegadores baseados no Webkit */
+    -moz-appearance: none; /* Para Firefox */
+    position: relative;
     cursor: pointer;
 
     &:hover {
-      background-color: ${({ theme }) => theme.colors.primaryHover};
+      background-color: ${({ theme }) => theme.colors.secondary2};
+    }
+
+    /* Estilizar a flecha manualmente */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='${({ theme }) =>
+    encodeURIComponent(
+      theme.colors.secondary7
+    )}'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+
+    option {
+      color: ${({ theme }) => theme.colors.secondary7}; /* Cor do texto nas opções */
     }
   }
 `;
@@ -36,7 +55,9 @@ const Filters = ({ filters, onFilterChange }) => {
         value={filters.sort_by || ""}
         onChange={handleSelectChange}
       >
-        <option value="">Ordenar Por</option>
+        <option value="" disabled>
+          Ordenar Por
+        </option>
         <option value="popularity.desc">Popularidade (Maior)</option>
         <option value="release_date.desc">Data de Lançamento</option>
         <option value="vote_average.desc">Avaliação</option>
@@ -46,7 +67,9 @@ const Filters = ({ filters, onFilterChange }) => {
         value={filters.with_genres || ""}
         onChange={handleSelectChange}
       >
-        <option value="">Gênero</option>
+        <option value="" disabled>
+          Gênero
+        </option>
         <option value="28">Ação</option>
         <option value="12">Aventura</option>
         <option value="16">Animação</option>

@@ -10,9 +10,6 @@ import FilterIcon from "../assets/icons/filter.svg";
 
 const Container = styled.div`
   .title {
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 2.5rem;
-    text-align: center;
     margin: 2rem 0 1rem;
   }
 `;
@@ -28,7 +25,7 @@ const TopBar = styled.div`
 `;
 
 const FilterButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.primaryBackground};
+  background-color: ${({ theme }) => theme.colors.primaryAlpha2};
   border: none;
   width: 64px;
   height: 48px;
@@ -43,7 +40,7 @@ const FilterButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.primaryBackground};
+    background-color: none;
     transform: none;
   }
 
@@ -61,7 +58,7 @@ const MoviesContainer = styled.div`
   max-width: 1322px;
   width: 100%;
   margin: 0 auto;
-  background-color: ${({ theme }) => theme.colors.primaryBorder};
+  background-color: ${({ theme }) => theme.colors.secondaryAlpha3};
   border-radius: 4px;
 
   @media (max-width: 768px) {
