@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BASE_URL, API_KEY } from "../services/env";
+import { fetchFromAPI, BASE_URL } from "../services/apiService";
 
 export const useFetchMovieDetails = (movieId) => {
   const [movie, setMovie] = useState(null);
@@ -7,23 +7,20 @@ export const useFetchMovieDetails = (movieId) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        setLoading(true);
-        const url = `${BASE_URL}movie/${movieId}?${API_KEY}&language=pt-BR`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error("Erro ao buscar detalhes do filme");
-        const data = await res.json();
-        setMovie(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (movieId) {
-      fetchMovieDetails();
+      const endpoint = `movie/${movieId}?language=pt-BR`;
+      const fetchData = async () => {
+        setLoading(true);
+        try {
+          const data = await fetchFromAPI(endpoint);
+          setMovie(data);
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchData();
     }
   }, [movieId]);
 

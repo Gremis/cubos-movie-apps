@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IMAGE_BASE_URL, BASE_URL, API_KEY } from "../services/env";
+import { fetchFromAPI, IMAGE_BASE_URL } from "../services/apiService";
 import logo from "/src/assets/pexels-cup-of-couple.jpg";
 
 export const useMovieCard = (movie) => {
@@ -7,10 +7,9 @@ export const useMovieCard = (movie) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchGenres = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL}genre/movie/list?${API_KEY}&language=pt-BR`);
-        const data = await response.json();
+        const data = await fetchFromAPI('genre/movie/list?language=pt-BR');
         setGenresList(data.genres || []);
       } catch (error) {
         console.error("Erro ao buscar os gêneros:", error);
@@ -18,8 +17,7 @@ export const useMovieCard = (movie) => {
         setLoading(false);
       }
     };
-
-    fetchGenres();
+    fetchData();
   }, []);
 
   const posterUrl = movie.poster_path
@@ -31,7 +29,7 @@ export const useMovieCard = (movie) => {
 
   const genres =
     movie.genre_ids?.map(
-      (id) => genresList.find((genre) => genre.id === id)?.name
+      id => genresList.find(genre => genre.id === id)?.name
     ) || [];
 
   return { posterUrl, title, voteAverage, genres, loading };

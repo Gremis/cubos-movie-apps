@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchFromAPI } from "../services/api";
+import { fetchFromAPI } from "../services/apiService";
 
 export const useMovies = (endpoint, defaultQuery = {}, itemsPerPage = 10) => {
   const [allMovies, setAllMovies] = useState([]);
@@ -18,10 +18,9 @@ export const useMovies = (endpoint, defaultQuery = {}, itemsPerPage = 10) => {
       const params = new URLSearchParams({
         ...filters,
         ...query,
-        page: Math.ceil(page / 2),
+        page: Math.ceil(page / 2)
       }).toString();
-      const url = `${endpoint}?${params}&language=pt-BR`;
-      const data = await fetchFromAPI(url);
+      const data = await fetchFromAPI(`${endpoint}?${params}&language=pt-BR`);
 
       const results = data.results || [];
       setAllMovies(results);
@@ -43,7 +42,7 @@ export const useMovies = (endpoint, defaultQuery = {}, itemsPerPage = 10) => {
   }, [filters, currentPage]);
 
   const handleFilterChange = (name, value) => {
-    setFilters((prev) => ({
+    setFilters(prev => ({
       ...prev,
       [name]: value,
     }));
