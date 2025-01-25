@@ -23,7 +23,7 @@ const PaginationContainer = styled.div`
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: ${({ theme }) => theme.colors.primaryHover};
+      background-color: ${({ theme }) => theme.colors.primary10};
     }
 
     &:disabled {
@@ -38,7 +38,7 @@ const PaginationContainer = styled.div`
   }
 
   .active {
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.primary8};
     color: #fff;
     font-weight: bold;
   }

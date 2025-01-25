@@ -9,7 +9,7 @@ export const useMovieCard = (movie) => {
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const response = await fetch(`${BASE_URL}genre/movie/list?${API_KEY}`);
+        const response = await fetch(`${BASE_URL}genre/movie/list?${API_KEY}&language=pt-BR`);
         const data = await response.json();
         setGenresList(data.genres || []);
       } catch (error) {

@@ -4,42 +4,45 @@ import styled from "styled-components";
 const FiltersContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: 1rem 0;
+  margin: 24px 73px 24px 0;
   flex-wrap: wrap;
   gap: 1rem;
 
   select {
     width: 100%;
-    max-width: 273px;
+    max-width: 237px;
     height: 50px;
     border: 1px solid ${({ theme }) => theme.colors.secondary7};
     border-radius: 4px;
     padding: 0 16px;
     background-color: ${({ theme }) => theme.colors.secondary2};
-    color: ${({ theme }) => theme.colors.secondary7}; /* Cor do texto */
-    appearance: none; /* Remove a flecha padrão */
-    -webkit-appearance: none; /* Para navegadores baseados no Webkit */
-    -moz-appearance: none; /* Para Firefox */
+    color: ${({ theme }) => theme.colors.secondary7};
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     position: relative;
     cursor: pointer;
+    background-image: url("/src/assets/icons/chevrondown.svg");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
 
     &:hover {
       background-color: ${({ theme }) => theme.colors.secondary2};
     }
 
-    /* Estilizar a flecha manualmente */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='${({ theme }) =>
-    encodeURIComponent(
-      theme.colors.secondary7
-    )}'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    background-size: 16px;
-
     option {
-      color: ${({ theme }) => theme.colors.secondary7}; /* Cor do texto nas opções */
+      color: ${({ theme }) => theme.colors.secondary7};
     }
+
+    &:focus {
+      border: 1px solid ${({ theme }) => theme.colors.primary9};
+    }
+
+    @media (max-width: 768px) {
+    max-width: 300px;
   }
+  } 
 `;
 
 const Filters = ({ filters, onFilterChange }) => {

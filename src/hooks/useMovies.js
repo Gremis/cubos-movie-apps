@@ -20,7 +20,7 @@ export const useMovies = (endpoint, defaultQuery = {}, itemsPerPage = 10) => {
         ...query,
         page: Math.ceil(page / 2),
       }).toString();
-      const url = `${endpoint}?${params}`;
+      const url = `${endpoint}?${params}&language=pt-BR`;
       const data = await fetchFromAPI(url);
 
       const results = data.results || [];

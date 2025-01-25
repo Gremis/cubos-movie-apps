@@ -56,7 +56,7 @@ const ThemeToggleButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: none;
+    background-color: ${({ theme }) => theme.colors.primaryAlpha3};
     transform: none;
   }
 

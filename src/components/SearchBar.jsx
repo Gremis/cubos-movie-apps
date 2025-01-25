@@ -36,6 +36,10 @@ const SearchForm = styled.form`
     }
   }
 
+  &:focus-within {
+    border-color: ${({ theme }) => theme.colors.primary9};
+  }
+
   button {
     background: none;
     border: none;
@@ -55,7 +59,12 @@ const SearchForm = styled.form`
       color: none;
     }
   }
+
+  @media (max-width: 768px) {
+    max-width: 300px;
+  }
 `;
+
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState("");

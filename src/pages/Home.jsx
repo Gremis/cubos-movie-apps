@@ -40,7 +40,7 @@ const FilterButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: none;
+    background-color: ${({ theme }) => theme.colors.primaryAlpha3};
     transform: none;
   }
 
@@ -63,6 +63,7 @@ const MoviesContainer = styled.div`
 
   @media (max-width: 768px) {
     padding: 16px;
+    justify-items: center;
   }
 `;
 

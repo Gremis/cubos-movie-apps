@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useFetchMovieVideos } from "../hooks/useFetchMovieVideos";
 import { useFetchMovieDetails } from "../hooks/useFetchMovieDetails";
+import { useFetchMovieImage } from "../hooks/useFetchMovieImage";
 
 const MoviePage = styled.div`
   display: flex;
@@ -33,6 +34,9 @@ const Details = styled.div`
   flex-direction: row;
   gap: 20px;
   justify-content: space-between;
+  align-items: center;
+  margin-top: -35px;
+  margin-bottom: -30px;
   width: 100%;
 
   h1 {
@@ -42,7 +46,7 @@ const Details = styled.div`
     line-height: 39.01px;
     font-weight: 600;
     text-align: left;
-    color: ${({ theme }) => theme.colors.secondaryAlpha12};
+    color: #EEEEF0;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   }
 
@@ -50,7 +54,7 @@ const Details = styled.div`
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: 400;
-    color: ${({ theme }) => theme.colors.secondaryAlpha11};
+    color: #EEEEF0;
     margin-bottom: 5px;
   }
 
@@ -59,7 +63,7 @@ const Details = styled.div`
     font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
-    color: ${({ theme }) => theme.colors.secondaryAlpha12};
+    color: #EEEEF0;
   }
 
   p:first-of-type {
@@ -127,10 +131,10 @@ const InfoRelease = styled.div`
   div {
     display: flex;
     flex-direction: column;
-    background-color: ${({ theme }) => theme.colors.secondaryAlpha3};
-  padding: 16px;
-  border-radius: 4px;
-  width: 100%;
+    background-color: ${({ theme }) => theme.colors.secondary3};
+    padding: 16px;
+    border-radius: 4px;
+    width: 100%;
   }
 
   h3 {
@@ -187,48 +191,57 @@ const Genres = styled.div`
 
 const ProgressCircle = styled.div`
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 160px;
+  height: 160px;
+  top: -30px;
 
   svg {
     width: 100%;
     height: 100%;
-    transform: rotate(-90deg);
+    transform: rotate(-120deg);
+  }
+
+  .background, .circle {
+    stroke: ${({ theme }) => theme.colors.secondaryAlpha4};
+    stroke-width: 7;
+    fill: none;
   }
 
   .background {
     stroke: ${({ theme }) => theme.colors.secondaryAlpha4};
-    stroke-width: 5;
-    fill: none;
   }
 
   .circle {
-    stroke-dasharray: 282.6;
+    stroke-dasharray: 314;
     stroke-dashoffset: ${({ percentage }) =>
-    282.6 - (percentage / 100) * 282.6};
+    314 - (percentage / 100) * 314};
     stroke: ${({ theme }) => theme.colors.warning};
-    stroke-width: 5;
     fill: none;
     transition: stroke-dashoffset 0.3s ease-in-out;
   }
 
   .percentage {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 65%;
+    left: 48%;
     transform: translate(-50%, -50%);
     color: ${({ theme }) => theme.colors.warning};
-    font-size: 1.2rem;
-    font-weight: bold;
-    background: none; 
-    padding: 0; 
-    border: none;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+
+    span {
+    color: #FFFF;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+  }
   }
 `;
 
 
 const Overview = styled.div`
-  background-color: ${({ theme }) => theme.colors.secondaryAlpha3};
+  background-color: ${({ theme }) => theme.colors.secondary3};
   border-radius: 4px;
   padding: 16px;
   width: 417px;
@@ -255,6 +268,7 @@ const Overview = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
+    height: auto;
   }
   `;
 
@@ -263,9 +277,14 @@ const TrailerContainer = styled.div`
   max-width: 1238px;
   height: 647px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+  justify-content: center;  
+  align-items: center;      
+  margin: 20px auto;       
+
+  @media (max-width: 768px) {
+    height: auto; 
+    padding: 20px;
+  }
 `;
 
 const GridContainer = styled.div`
@@ -276,8 +295,9 @@ const GridContainer = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.secondaryAlpha3};
   border-radius: 4px;
+  background-size: cover;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1300px) {
     grid-template-columns: 1fr;
     margin: 0;
   }
@@ -304,17 +324,22 @@ const DetailsOverview = styled.div`
   justify-content: space-between;
   gap: 20px;
   width: 100%;
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     flex-direction: column;
+    align-items: center;
   }
 `;
 
 const OverviewSection = styled.div`
   flex: 1;
+
+  @media (max-width: 1000px) {
+    place-items: center 
+  }
 `;
 
 const GenresSection = styled.div`
-  background-color: ${({ theme }) => theme.colors.secondaryAlpha3};
+  background-color: ${({ theme }) => theme.colors.secondary3};
   border-radius: 4px;
   padding: 16px;
   width: auto;
@@ -344,7 +369,7 @@ const FinancialInfoSection = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
-    background-color: ${({ theme }) => theme.colors.secondaryAlpha3};
+    background-color: ${({ theme }) => theme.colors.secondary3};
   padding: 16px;
   border-radius: 4px;
   width: 120px;
@@ -374,14 +399,7 @@ const Movie = () => {
   const { id } = useParams();
   const { movie, loading, error } = useFetchMovieDetails(id);
   const { trailer, loading: trailerLoading } = useFetchMovieVideos(id);
-
-  const formatCurrency = (number) =>
-    number
-      ? number.toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD",
-      })
-      : "N/A";
+  const { movieImage, loading: imageLoading, error: imageError } = useFetchMovieImage(id);
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -404,7 +422,7 @@ const Movie = () => {
     if (number === undefined || number === null) return "N/A";
 
     const isNegative = number < 0;
-    const absoluteNumber = Math.abs(number); // Trabalha com o valor absoluto
+    const absoluteNumber = Math.abs(number);
 
     if (absoluteNumber >= 1_000_000_000) {
       return `${isNegative ? "-" : ""}$${(absoluteNumber / 1_000_000_000).toFixed(2)}B`;
@@ -416,14 +434,16 @@ const Movie = () => {
   };
 
 
-  if (loading) return <p>Carregando detalhes do filme...</p>;
-  if (error) return <p>Erro: {error}</p>;
-
+  if (loading || imageLoading) return <p>Carregando detalhes do filme...</p>;
+  if (error || imageError) return <p>Erro: {error || imageError}</p>;
+  const backImageUrl = `url(https://image.tmdb.org/t/p/original${movieImage})`;
   return (
     <MoviePage>
       {movie && (
         <>
-          <GridContainer>
+          <GridContainer style={{
+            backgroundImage: `linear-gradient(90deg, #121113 0%, rgba(18, 17, 19, 0.8) 50%, rgba(18, 17, 19, 0) 100%), ${backImageUrl}`
+          }}>
             <PosterSection>
               <Poster
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -447,11 +467,11 @@ const Movie = () => {
                     <p>{movie.vote_count}</p>
                   </div>
                   <ProgressCircle percentage={movie.vote_average * 10}>
-                    <svg width="100" height="100">
-                      <circle cx="50" cy="50" r="45" className="background" />
-                      <circle cx="50" cy="50" r="45" className="circle" />
+                    <svg viewBox="0 0 160 160">
+                      <circle cx="60" cy="60" r="50" className="background" />
+                      <circle cx="60" cy="60" r="50" className="circle" />
                     </svg>
-                    <div className="percentage">{Math.round(movie.vote_average * 10)}%</div>
+                    <div className="percentage">{Math.round(movie.vote_average * 10)}<span>%</span></div>
                   </ProgressCircle>
                 </Info>
               </Details>
@@ -489,7 +509,7 @@ const Movie = () => {
                     <div>
                       <h3>Idiomas</h3>
                       <p>
-                        {movie.spoken_languages.map((lang) => lang.name).join(" - ")}
+                        {movie.spoken_languages.map((lang) => lang.english_name).join(" - ")}
                       </p>
                     </div>
                   </InfoRelease>

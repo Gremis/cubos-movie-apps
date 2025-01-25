@@ -14,49 +14,71 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  text-shadow: 0px 0px 5px ${({ theme }) => theme.colors.secondaryAlpha4}
+  text-shadow: 0px 0px 5px ${({ theme }) => theme.colors.secondaryAlpha4};
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 `;
 
 const ProgressCircle = styled.div`
   position: relative;
-  width: 80px;
+  width: 160px;
   top: -100px;
-  height: 80px;
+  height: 160px;
   opacity: 0; 
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 65%;
+    left: 45%;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -50px;
+    border-radius: 40%;
+    backdrop-filter: blur(3px);
+    z-index: -1;
+  }
+
   svg {
     width: 100%;
     height: 100%;
-    transform: rotate(-90deg);
+    transform: rotate(-120deg);
+  }
+
+  .background, .circle {
+    stroke-width: 7;
+    fill: none;
   }
 
   .background {
     stroke: ${({ theme }) => theme.colors.secondaryAlpha4};
-    stroke-width: 5;
-    fill: none;
   }
 
   .circle {
-    stroke-dasharray: 282.6;
-    stroke-dashoffset: ${({ percentage }) =>
-    282.6 - (percentage / 100) * 282.6};
+    stroke-dasharray: 314;
+    stroke-dashoffset: ${({ percentage }) => 314 - (percentage / 100) * 314};
     stroke: ${({ theme }) => theme.colors.warning};
-    stroke-width: 5;
-    fill: none;
     transition: stroke-dashoffset 0.3s ease-in-out;
   }
 
   .percentage {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 65%;
+    left: 48%;
     transform: translate(-50%, -50%);
     color: ${({ theme }) => theme.colors.warning};
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+
+    span {
+    color: #FFFF;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+  }
   }
 `;
 
@@ -80,7 +102,7 @@ const Title = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   line-height: 19.5px;
-  font-weight: 400;
+  font-weight: 600;
   text-transform: uppercase;
   text-align: left; 
   z-index: 2;
@@ -147,11 +169,11 @@ const MovieCard = ({ movie }) => {
       <img src={posterUrl} alt={title} />
       <Content>
         <ProgressCircle percentage={voteAverage * 10}>
-          <svg>
-            <circle cx="40" cy="40" r="35" className="background" />
-            <circle cx="40" cy="40" r="35" className="circle" />
+          <svg viewBox="0 0 160 160">
+            <circle cx="60" cy="60" r="50" className="background" />
+            <circle cx="60" cy="60" r="50" className="circle" />
           </svg>
-          <div className="percentage">{Math.round(voteAverage * 10)}%</div>
+          <div className="percentage">{Math.round(voteAverage * 10)}<span>%</span></div>
         </ProgressCircle>
         <Title>{title}</Title>
         {loading ? (
