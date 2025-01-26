@@ -1,7 +1,8 @@
 import React from "react";
 import { FiltersContainer } from "../styles/FiltersStyles";
+import ResetIcon from '../assets/icons/filterclean.svg'; 
 
-const Filters = ({ filters, onFilterChange }) => {
+const Filters = ({ filters, onFilterChange, onResetFilters }) => {
   const handleSelectChange = (e) => {
     const { name, value } = e.target;
     onFilterChange(name, value);
@@ -35,6 +36,9 @@ const Filters = ({ filters, onFilterChange }) => {
         <option value="35">Comédia</option>
         <option value="80">Crime</option>
       </select>
+      <button onClick={onResetFilters}>
+        <img src={ResetIcon} alt="Reset Filters" />
+      </button>
     </FiltersContainer>
   );
 };
