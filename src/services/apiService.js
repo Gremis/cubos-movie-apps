@@ -5,30 +5,26 @@ export const BEARER_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkOWJiYTU2MmMzMzZmZm
 
 export const fetchFromAPI = async (endpoint, method = "GET", body = null, useBearer = false) => {
     try {
-        const url = `${BASE_URL}${endpoint}${!useBearer ? `&${API_KEY}` : ''}`;
+        const url = `${BASE_URL}${endpoint}${useBearer ? '' : `&${API_KEY}`}`;
         const headers = {
-            "Content-Type": "application/json;charset=utf-8"
+            "Content-Type": "application/json;charset=utf-8",
+            ...(useBearer && { Authorization: `Bearer ${BEARER_TOKEN}` })
         };
-
-        if (useBearer) {
-            headers.Authorization = `Bearer ${BEARER_TOKEN}`;
-        }
 
         const options = {
-            method: method,
-            headers: headers,
+            method,
+            headers,
+            ...(body && { body: JSON.stringify(body) })  // Adiciona o body somente se necessário
         };
 
-        if (method !== "GET" && method !== "HEAD" && body) {
-            options.body = JSON.stringify(body);
+        const response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar dados: ${response.status}`);
         }
-
-        const res = await fetch(url, options);
-
-        if (!res.ok) throw new Error(`Erro ao buscar dados: ${res.status}`);
-        return await res.json();
+        return await response.json();
     } catch (error) {
         console.error("Erro na API:", error.message);
         return null;
     }
 };
+

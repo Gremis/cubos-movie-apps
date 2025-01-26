@@ -4,7 +4,7 @@ export const FiltersContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: 24px 0;
-  flex-wrap: wrap;
+  flex-direction: row;
   gap: 15px;
 
   button {
@@ -66,5 +66,11 @@ export const FiltersContainer = styled.div`
     @media (max-width: 768px) {
       max-width: 300px;
     }
+  }
+
+  @media (max-width: 768px) {
+      flex-direction: column ;
+      align-items: center;
+      margin-left: -72px;
   }
 `;

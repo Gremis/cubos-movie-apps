@@ -287,7 +287,20 @@ export const TrailerContainer = styled.div`
     text-align: left;
     color: #EEEEF0;
     width: 100%; 
-  } 
+  }
+
+  p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: ${({ theme }) => theme.colors.secondaryAlpha11}; 
+    line-height: 1.5;
+    text-align: left;
+    margin: 10px 0;
+    width: 100%;
+    background-color: ${({ theme }) => theme.colors.secondary3};
+    padding: 10px;
+    border-radius: 4px;
+  }
 
 @media (max-width: 768px) {
   height: auto; 

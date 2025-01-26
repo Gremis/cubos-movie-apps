@@ -22,8 +22,7 @@ export const SearchForm = styled.form`
     font-weight: 400;
 
     &::placeholder {
-      color: ${({ theme }) => theme.colors.textSecondary};
-      opacity: 0.5;
+      color: ${({ theme }) => theme.colors.secondary9};
       font-size: 16px;
       line-height: 24px;
       font-weight: 400;
