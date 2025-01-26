@@ -92,4 +92,4 @@ https://developer.themoviedb.org/reference/intro/getting-started
 
 ## ⚙️ Projeto Online:
 
-Para servir a build localmente
+https://cubos-movie-apps.vercel.app/
