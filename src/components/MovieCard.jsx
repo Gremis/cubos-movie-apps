@@ -3,13 +3,33 @@ import { useNavigate } from "react-router-dom";
 import { useMovieCard } from "../hooks/useMovieCard";
 import { CardContainer, Content, ProgressCircle, Genres, Title } from "../styles/MovieCardStyles";
 
-const MovieCard = ({ movie }) => {
-  const { posterUrl, title, voteAverage, genres, loading } = useMovieCard(movie);
+const MovieCard = ({ movie, loading, error }) => {
+  const { posterUrl, title, voteAverage, genres } = useMovieCard(movie);
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/movie/${movie.id}`);
   };
+
+  if (loading) {
+    return (
+      <CardContainer>
+        <Content>
+          <h2>Carregando...</h2>
+        </Content>
+      </CardContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <CardContainer>
+        <Content>
+          <h2 style={{ color: 'red' }}>Erro ao carregar filmes</h2>
+        </Content>
+      </CardContainer>
+    );
+  }
 
   return (
     <CardContainer onClick={handleClick} percentage={voteAverage * 10}>
@@ -23,13 +43,9 @@ const MovieCard = ({ movie }) => {
           <div className="percentage">{Math.round(voteAverage * 10)}<span>%</span></div>
         </ProgressCircle>
         <Title>{title}</Title>
-        {loading ? (
-          <p>Carregando gêneros...</p>
-        ) : (
-          <Genres>
-            {genres.join(" / ")}
-          </Genres>
-        )}
+        <Genres>
+          {genres.join(" / ")}
+        </Genres>
       </Content>
     </CardContainer>
   );

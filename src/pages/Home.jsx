@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMovies } from "../hooks/useMovies";
 import MovieCard from "../components/MovieCard";
 import Filters from "../components/Filters";
@@ -10,6 +10,7 @@ import FilterIcon from "../assets/icons/filter.svg";
 const Home = () => {
   const [filtersVisible, setFiltersVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const endpoint = searchQuery ? "search/movie" : "discover/movie";
   const {
@@ -21,8 +22,16 @@ const Home = () => {
     totalPages,
     changePage,
     handleFilterChange,
-    resetFilters  // Garanta que você está destruindo resetFilters do hook
+    resetFilters
   } = useMovies(endpoint, { query: searchQuery });
+
+  useEffect(() => {
+    if (loading) {
+      setInitialLoading(true);
+    } else {
+      setInitialLoading(false);
+    }
+  }, [loading]);
 
   const toggleFilters = () => {
     setFiltersVisible(prev => !prev);
@@ -33,8 +42,7 @@ const Home = () => {
     handleFilterChange('query', query);
   };
 
-  if (loading) return <p>Carregando...</p>;
-  if (error) return <p>{error}</p>;
+  const placeholderMovies = Array.from({ length: 10 }, (_, index) => ({ id: index }));
 
   return (
     <Container>
@@ -54,11 +62,18 @@ const Home = () => {
       )}
 
       <MoviesContainer>
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
+        {(initialLoading || error)
+          ? placeholderMovies.slice(0, 10).map((movie) => (
+            <MovieCard key={movie.id} movie={movie} loading={initialLoading} error={error} />
+          ))
+          : movies.slice(0, 10).map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
       </MoviesContainer>
-      <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={changePage} />
+
+      {!initialLoading && !error && (
+        <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={changePage} />
+      )}
     </Container>
   );
 };

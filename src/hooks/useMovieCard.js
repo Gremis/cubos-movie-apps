@@ -20,17 +20,18 @@ export const useMovieCard = (movie) => {
     fetchData();
   }, []);
 
-  const posterUrl = movie.poster_path
+  const posterUrl = movie?.poster_path
     ? `${IMAGE_BASE_URL}${movie.poster_path}`
     : logo;
 
-  const title = movie.title || "Título Indisponível";
-  const voteAverage = movie.vote_average || "N/A";
+  const title = movie?.title || "Título Indisponível";
+  const voteAverage = movie?.vote_average || "N/A";
 
-  const genres =
-    movie.genre_ids?.map(
+  const genres = movie?.genre_ids
+    ? movie.genre_ids.map(
       id => genresList.find(genre => genre.id === id)?.name
-    ) || [];
+    )
+    : [];
 
   return { posterUrl, title, voteAverage, genres, loading };
 };

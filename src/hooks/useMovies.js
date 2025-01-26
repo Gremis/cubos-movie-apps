@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchFromAPI } from "../services/apiService";
 
-export const useMovies = (endpoint, defaultQuery = {}, itemsPerPage = 10) => {
+export const useMovies = (endpoint, defaultQuery = {}) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

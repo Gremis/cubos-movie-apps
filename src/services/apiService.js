@@ -14,7 +14,7 @@ export const fetchFromAPI = async (endpoint, method = "GET", body = null, useBea
         const options = {
             method,
             headers,
-            ...(body && { body: JSON.stringify(body) })  // Adiciona o body somente se necessário
+            ...(body && { body: JSON.stringify(body) }) 
         };
 
         const response = await fetch(url, options);

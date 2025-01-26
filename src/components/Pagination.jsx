@@ -1,4 +1,3 @@
-// src/Pagination.js
 import React from "react";
 import { PaginationContainer } from "../styles/PaginationStyles";
 import ChevronLeftIcon from "../assets/icons/chevronleft.svg";

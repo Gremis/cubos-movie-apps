@@ -13,6 +13,18 @@ box-sizing: border-box;
 }
 `;
 
+export const LoadingErrorContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color:${({ theme }) => theme.colors.secondary3};
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  padding: 20px;
+`;
+
 export const Poster = styled.img`
 width: 354.51px;
 height: 542px;
@@ -71,7 +83,7 @@ p:nth-of-type(2) {
   margin-top: 19px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   flex-direction: column;
 }
 `;
@@ -303,7 +315,7 @@ export const TrailerContainer = styled.div`
   }
 
 @media (max-width: 768px) {
-  height: auto; 
+  height: 400px; 
   padding: 20px;
 }
 `;
