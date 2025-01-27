@@ -70,10 +70,7 @@ const Home = () => {
             <MovieCard key={movie.id} movie={movie} />
           ))}
       </MoviesContainer>
-
-      {!initialLoading && !error && (
-        <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={changePage} />
-      )}
+      <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={changePage} />
     </Container>
   );
 };
