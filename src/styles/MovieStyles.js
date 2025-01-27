@@ -222,7 +222,7 @@ svg {
 .circle {
   stroke-dasharray: 314;
   stroke-dashoffset: ${({ percentage }) =>
-  314 - (percentage / 100) * 314};
+    314 - (percentage / 100) * 314};
   stroke: ${({ theme }) => theme.colors.warning};
   fill: none;
   transition: stroke-dashoffset 0.3s ease-in-out;
@@ -333,6 +333,7 @@ background-size: cover;
 @media (max-width: 1300px) {
   grid-template-columns: 1fr;
   margin: 0;
+  height: auto;
 }
 `;
 
@@ -348,6 +349,11 @@ display: flex;
 flex-direction: column;
 gap: 20px;
 margin: 32px 32px;
+@media (max-width: 768px) {
+    margin: 0; 
+    width: 100%; 
+  
+}
 
 `;
 
